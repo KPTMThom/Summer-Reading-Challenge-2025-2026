@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Library Reading Challenge</title>
+  
+  <link rel="stylesheet" href="styles.css">
+  
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <header class="main-header">
+    <h1>Library Reading Challenge</h1>
+    <div class="profile" id="profileIcon">
+      <span id="profileInitial">U</span>
+      <div class="dropdown" id="profileDropdown">
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-grid">
+
+    <section class="card" id="welcomeCard">
+      <h2 id="welcomeMessage">Welcome back!</h2>
+    </section>
+
+    <section class="card" id="userMinutesCard">
+      <h3>Your Logged Minutes</h3>
+      <p id="userMinutes">0 minutes</p>
+    </section>
+
+    <section class="card" id="streakCard">
+      <h3>Reading Streak</h3>
+      <div class="stat-big-icon">🔥</div>
+      <p class="stat-big-number">5</p>
+      <p class="stat-big-label">days in a row!</p>
+    </section>
+
+    <section class="card" id="badgesCard">
+      <h3>My Badges</h3>
+      <div class="badge-container">
+        <div class="badge" title="100 Minute Club">📖</div>
+        <div class="badge" title="3-Day Streak">🔥</div>
+        <div class="badge" title="Weekend Warrior">📅</div>
+        <div class="badge locked" title="500 Minute Star (Locked)">🔒</div>
+        <div class="badge locked" title="Bookworm (Locked)">🔒</div>
+      </div>
+    </section>
+    
+    <section class="card" id="logMinutesCard">
+      <h3>Log Your Reading</h3>
+      <div class="log-form-stacked">
+        <label for="minutesInput">Minutes Read:</label>
+        <input type="number" id="minutesInput" placeholder="e.g., 30" min="1" max="120">
+        
+        <label for="bookTitleInput">What book did you read?</label>
+        <input type="text" id="bookTitleInput" placeholder="e.g., Dog Man">
+        
+        <label for="bookRatingInput">Rate the book? (Optional)</label>
+        <select id="bookRatingInput">
+          <option value="">-- Select a rating --</option>
+          <option value="5">★★★★★ (Awesome!)</option>
+          <option value="4">★★★★☆ (Good)</option>
+          <option value="3">★★★☆☆ (Okay)</option>
+          <option value="2">★★☆☆☆ (Not great)</option>
+          <option value="1">★☆☆☆☆ (Bad)</option>
+        </select>
+        
+        <button class="submit-minutes" id="logMinutesBtn">Log Reading</button>
+      </div>
+      <p id="logMessage"></p>
+    </section>
+
+    <section class="card" id="bookshelfCard">
+      <div class="card-header-tabs">
+        <h3>Bookshelf</h3>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="myBookshelf">My Books</button>
+          <button class="tab-btn" data-tab="trendingBooks">Trending</button>
+        </div>
+      </div>
+      
+      <div id="myBookshelf" class="tab-content active">
+        <div class="book-entry">
+          <p class="book-title">Dog Man: Grime and Punishment</p>
+          <p class="book-rating">You rated: ★★★★★</p>
+        </div>
+        <div class="book-entry">
+          <p class="book-title">The Magic Treehouse</p>
+          <p class="book-rating">You rated: ★★★★☆</p>
+        </div>
+        <div class="book-entry">
+          <p class="book-title">Cat Kid Comic Club</p>
+          <p class="book-rating">You rated: ★★★★★</p>
+        </div>
+      </div>
+      
+      <div id="trendingBooks" class="tab-content">
+        <div class="book-entry">
+          <p class="book-title">1. Dog Man: Grime and Punishment</p>
+          <p class="book-rating">Avg. ★★★★★ (42 readers)</p>
+        </div>
+        <div class="book-entry">
+          <p class="book-title">2. Cat Kid Comic Club</p>
+          <p class="book-rating">Avg. ★★★★★ (31 readers)</p>
+        </div>
+        <div class="book-entry">
+          <p class="book-title">3. The Magic Treehouse</p>
+          <p class="book-rating">Avg. ★★★★☆ (19 readers)</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="card" id="teamCard">
+      <h3>My Team: The Book Ninjas 🥷</h3>
+      <p>Our team has read a total of <strong>1,760 minutes!</strong></p>
+      <ul class="team-members">
+        <li>You (840 mins)</li>
+        <li>Mom (620 mins)</li>
+        <li>Leo (300 mins)</li>
+      </ul>
+      <button class="small-btn" id="inviteBtn">Invite a family member</button>
+    </section>
+    
+    <section class="card" id="leaderboardCard">
+      <h3>Top 10 Leaderboard</h3>
+      <div id="leaderboardContainer" class="leaderboard-list">
+        </div>
+    </section>
+
+    <section class="card" id="communityCard">
+      <h3>Community Progress</h3>
+      <p id="communityProgressText">Calculating...</p>
+      <progress id="communityProgressBar" value="0" max="1000000"></progress>
+    </section>
+
+  </main>
+
+  <script src="dashboard.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
