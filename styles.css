@@ -3,111 +3,250 @@
 
 :root {
   --font-main: 'Quicksand', sans-serif;
-  --color-background: #f8f9fa;
-  --color-surface: #ffffff;
-  --color-text: #34495e;
-  --color-primary: #00a8e8;
+  
+  --color-background: #f8f9fa; /* Super light, clean background */
+  --color-surface: #ffffff;     /* Clean white for cards */
+  --color-text: #34495e;       /* Dark, slightly soft text */
+  --color-text-muted: #7f8c8d;
+
+  --color-primary: #00a8e8;    /* Bright, fun blue */
   --color-primary-dark: #007cb5;
-  --color-accent: #ff6f00;
-  --color-success: #4caf50;
-  --color-error: #e74c3c;
+  --color-accent: #ff6f00;      /* Sunny orange */
+  --color-success: #4caf50;    /* Bright green */
+  --color-error: #e74c3c;      /* Soft red */
+  
   --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.05);
   --shadow-strong: 0 6px 18px rgba(0, 0, 0, 0.1);
-  --radius: 12px;
+  --radius: 12px; /* Bubbly corners */
 }
 
 /* --- Global Styles --- */
 body {
   font-family: var(--font-main);
+  font-weight: 500;
   background-color: var(--color-background);
   color: var(--color-text);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-items: center;
   min-height: 100vh;
+  margin: 0;
+  padding: 0; /* Changed for mobile-first */
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5 {
+  font-family: var(--font-main);
+  font-weight: 700;
   color: var(--color-primary);
+  margin-top: 0;
 }
 
 a {
   color: var(--color-primary);
   text-decoration: none;
+  font-weight: 700;
+}
+a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: none;
 }
 
-/* --- Header --- */
-.main-header {
-  background-color: var(--color-surface);
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select { /* Added select */
   width: 100%;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
   box-sizing: border-box;
-  position: relative; /* Ensures it's part of the flow */
+  font-size: 1rem;
+  font-family: var(--font-main);
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.main-header h1 {
-  margin: 0;
-  font-size: 2rem;
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus { /* Added select */
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 168, 232, 0.2);
 }
 
-.profile {
-  display: flex;
-  align-items: center;
-}
 
-.profile span {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-right: 1rem;
-}
-
-.profile .dropdown {
-  display: none;
-}
-
-.profile:hover .dropdown {
-  display: block;
-}
-
-/* --- Main Content Layout --- */
-main {
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
-  flex-grow: 1;
-}
-
-/* --- Dashboard Grid --- */
-.dashboard-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 2rem 0; /* Add top and bottom margin to create space below the header */
-  width: 100%;
-}
-
-.card {
+/* --- Login Page Styles --- */
+.login-container {
   background: var(--color-surface);
-  border-radius: 16px;
-  box-shadow: var(--shadow-light);
-  padding: 1.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  flex: 1 1 280px; /* Cards can shrink, but their base size is 280px */
+  padding: 2.5rem;
+  border-radius: 16px; /* Extra bubbly */
+  box-shadow: var(--shadow-strong);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  margin: 1rem; /* Add margin for small screens */
   box-sizing: border-box;
+}
+
+.login-container > p {
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.form-group {
   display: flex;
   flex-direction: column;
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.form-group label {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+button[type="submit"] {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+button[type="submit"]:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.signup-link {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
+#message {
+  margin-top: 1.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.message-success { color: var(--color-success); }
+.message-error { color: var(--color-error); }
+
+/* --- Dashboard Styles --- */
+
+/* Main Header */
+.main-header {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem; /* Changed for mobile-first */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  box-sizing: border-box;
+}
+
+.main-header h1 {
+  font-size: 1.5rem; /* Changed for mobile-first */
+}
+
+/* Profile Icon & Dropdown */
+.profile {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  font-family: var(--font-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: var(--color-surface);
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
   box-shadow: var(--shadow-strong);
+  overflow: hidden;
+  z-index: 10;
+  width: 120px;
+}
+
+.dropdown button {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-main);
+  color: var(--color-text);
+}
+
+.dropdown button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Changed for mobile-first */
+  gap: 1rem; /* Changed for mobile-first */
+  padding: 1rem; /* Changed for mobile-first */
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%; /* Added */
+  box-sizing: border-box; /* Added */
+}
+
+/* Card Styling */
+.card {
+  background: var(--color-surface);
+  border-radius: 16px; /* Bubbly */
+  box-shadow: var(--shadow-light);
+  padding: 1.5rem; /* Changed for mobile-first */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  /* Disabled hover on mobile */
+  transform: none;
+  box-shadow: var(--shadow-light);
 }
 
 .card h3 {
@@ -116,15 +255,344 @@ main {
   font-size: 1.3rem;
 }
 
-/* --- Responsive Layouts --- */
-@media (max-width: 768px) {
-  .dashboard-grid {
-    flex-direction: column; /* Stack the cards vertically on small screens */
-    align-items: center; /* Center them on smaller screens */
+/* User Minutes Card */
+#userMinutesCard p {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-accent); /* Orange for highlight */
+  margin: 1rem 0 0 0;
+  font-family: var(--font-main);
+}
+
+/* Leaderboard Card */
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.leaderboard-entry {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.leaderboard-profile {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: white;
+  border-radius: 50%;
+  background-color: var(--color-primary); /* Blue default */
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  font-family: var(--font-main);
+}
+.leaderboard-entry:nth-child(1) .leaderboard-profile { background-color: #ffd700; color: #333; } /* Gold */
+.leaderboard-entry:nth-child(2) .leaderboard-profile { background-color: #c0c0c0; color: #333; } /* Silver */
+.leaderboard-entry:nth-child(3) .leaderboard-profile { background-color: #cd7f32; } /* Bronze */
+
+.leaderboard-bar-container {
+  flex-grow: 1;
+  background-color: #f0f0f0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 24px;
+}
+
+.leaderboard-bar {
+  height: 100%;
+  background-color: var(--color-accent); /* Orange for data */
+  white-space: nowrap;
+  padding: 0 10px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 24px;
+  transition: width 0.3s ease;
+}
+
+.leaderboard-label {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+
+/* Community Card */
+#communityProgressText {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin: 0 0 0.75rem 0;
+}
+
+progress[id="communityProgressBar"] {
+  width: 100%;
+  height: 16px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+progress[id="communityProgressBar"]::-webkit-progress-bar {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+progress[id="communityProgressBar"]::-webkit-progress-value {
+  background: var(--color-accent); /* Orange for data */
+}
+progress[id="communityProgressBar"]::-moz-progress-bar {
+  background: var(--color-accent); /* Orange for data */
+  border-radius: 10px;
+}
+
+/* Log Minutes Card */
+.log-form {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.log-form input[type="number"] {
+  flex-grow: 1;
+}
+
+button.submit-minutes {
+  background-color: var(--color-success); /* Green for "go" */
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button.submit-minutes:hover {
+  background-color: #43a047;
+  transform: translateY(-2px);
+}
+
+#logMessage {
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-error);
+}
+
+/* --- New Feature Mockup Styles --- */
+
+/* Streak Card */
+#streakCard {
+  text-align: center;
+}
+.stat-big-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-top: 0.5rem;
+}
+.stat-big-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin: 0;
+}
+.stat-big-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Badges Card */
+.badge-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.badge {
+  font-size: 2.5rem;
+  background: #fff;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+.badge.locked {
+  opacity: 0.4;
+  filter: grayscale(100%);
+  background: #f0f0f0;
+}
+
+/* Modified Log Minutes Card */
+.log-form-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.log-form-stacked label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: -5px;
+}
+.log-form-stacked select,
+.log-form-stacked input {
+  width: 100%;
+}
+.log-form-stacked button.submit-minutes {
+  margin-top: 0.5rem;
+  padding: 12px; /* Make it a bit shorter */
+}
+
+/* Bookshelf Card */
+.card-header-tabs {
+  display: flex;
+  flex-direction: column; /* Stack on mobile */
+  align-items: flex-start;
+  gap: 1rem; /* Add gap for stacked items */
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+.card-header-tabs h3 {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%; /* Make tabs fill width */
+}
+.tab-btn {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background: #f0f0f0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  flex-grow: 1; /* Make buttons equal width */
+}
+.tab-btn.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+.tab-content {
+  display: none; /* JS will toggle this */
+}
+.tab-content.active {
+  display: block;
+}
+.book-entry {
+  display: flex;
+  flex-direction: column; /* Stack on mobile */
+  align-items: flex-start;
+  gap: 0.25rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0.75rem 0;
+}
+.book-entry:last-child {
+  border-bottom: none;
+}
+.book-title {
+  font-weight: 700;
+  margin: 0;
+}
+.book-rating {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Team Card */
+.team-members {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+.team-members li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-weight: 700;
+}
+.team-members li:first-child {
+  border-top: 1px solid #f0f0f0;
+}
+button.small-btn {
+  font-family: var(--font-main);
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+button.small-btn:hover {
+  background: #e0e0e0;
+}
+
+
+/* --- Responsive Media Queries (NEW) --- */
+
+/* On screens 600px or wider (tablets and desktops) */
+@media (min-width: 600px) {
+
+  .main-header {
+    padding: 1.5rem 2rem; /* Restore desktop padding */
+  }
+  
+  .main-header h1 {
+    font-size: 1.75rem; /* Restore desktop font size */
   }
 
+  .dashboard-grid {
+    /* Use your responsive grid layout again */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; /* Restore desktop gap */
+    padding: 2rem; /* Restore desktop padding */
+  }
+  
   .card {
-    flex: 1 1 100%; /* Make each card take full width */
-    margin-bottom: 1rem; /* Add space between stacked cards */
+     padding: 1.5rem 2rem; /* Restore desktop padding */
+  }
+  
+  .card-header-tabs {
+    flex-direction: row; /* Row layout on desktop */
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .tabs {
+    width: auto; /* Auto width on desktop */
+  }
+  
+  .tab-btn {
+    flex-grow: 0; /* Auto width buttons */
+  }
+  
+  .book-entry {
+    flex-direction: row; /* Row layout on desktop */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Re-enable hover effect only on devices that *can* hover */
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-strong);
+    }
   }
 }
