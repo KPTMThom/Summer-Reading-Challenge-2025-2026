@@ -218,14 +218,16 @@ button[type="submit"]:disabled {
   background-color: #f0f0f0;
 }
 
-/* Dashboard Grid Layout */
+/* Dashboard Grid Layout - Responsive Version */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Flexibly fill space */
   gap: 1.5rem;
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Card Styling */
@@ -301,3 +303,4 @@ button[type="submit"]:disabled {
   background-color: var(--color-accent); /* Orange for data */
   white-space: nowrap;
   padding: 0 10px;
+}
